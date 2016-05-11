@@ -16,7 +16,7 @@ $(document).ready(function () {
         if($(this).attr("class")=="undo"){
             var i=$(this).attr("index").substring(2,3);
             saveList("","done",i);
-            $(this).append('<div class="del"><button onclick="del('+i+')"><i class="iconfont">&#xe601;</i></button></div>')
+            $(this).append('<div class="del"><button onclick="del('+i+')"><i class="iconfont">&#xe601;</i></button></div>');
             $(this).removeClass("undo");
             $(this).addClass("done");
         }else {
@@ -52,7 +52,7 @@ function setList(content,type){
         var temp=$(".con-list");
         temp.append('<li index="li'+i+'" class="'+type[i]+'"><a>'+content[i]+'</a></li>');
         if(type[i]=="done"){
-            $("li[index=li"+i+"]").append('<div class="del"><button onclick="del()"><i class="iconfont">&#xe601;</i></button></div>');
+            $("li[index=li"+i+"]").append('<div class="del"><button onclick="del('+i+')"><i class="iconfont">&#xe601;</i></button></div>');
         }
     }
 }
@@ -97,6 +97,8 @@ function saveList(content,type,int) {
             for(var i=0;i<con[0].length;i++){
                 if(i==int){
                     txt+='{"content":"'+con[0][i]+'","type":"'+type+'"},';
+                }else {
+                    txt+='{"content":"'+con[0][i]+'","type":"'+con[1][i]+'"},';
                 }
             }
         }else {
