@@ -22,14 +22,14 @@ $(document).ready(function () {
             $(this).removeClass("done");
             $(this).addClass("undo");
         }
-    })
+    });
     $("li").dblclick(function () {
         if($(this).attr("class")=="done"){
             saveList("","",$(this).attr("index").substring(2,3));
             $(this).remove();
         }else {
         }
-    })
+    });
 });
 
 function LocalStorage(con) {
