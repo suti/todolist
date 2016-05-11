@@ -46,7 +46,7 @@ input{
     width:300px;
     /*border:none;*/
 }
-button{
+form button{
     position: absolute;
     background-color: aqua;
     border: none;
@@ -62,6 +62,7 @@ ul{
     padding: 0;
 }
 li{
+    position: relative;
     height:40px;
     border-radius: 10px;
     padding:0;
@@ -75,4 +76,27 @@ li{
 .done{
     background-color: darkgray;
     text-decoration: line-through;
+}
+.del{
+    top: -16px;
+    left: 348px;
+    position: absolute;
+    height:20px;
+    width:20px;
+    border-radius:20px;
+    border-color: coral;
+    border-width:2px;
+    border-style: solid;
+    text-align: center;
+}
+.del button{
+    position: absolute;
+    top: 1px;
+    left: -4px;
+    border: none;
+    background-color: inherit;
+}
+.del i{
+    color: coral;
+    font-size: 16px;
 }

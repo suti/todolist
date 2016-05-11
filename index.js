@@ -14,24 +14,28 @@ $(document).ready(function () {
     });
     $("li").click(function () {
         if($(this).attr("class")=="undo"){
-            saveList("","done",$(this).attr("index").substring(2,3));
+            var i=$(this).attr("index").substring(2,3);
+            saveList("","done",i);
+            $(this).append('<div class="del"><button onclick="del('+i+')"><i class="iconfont">&#xe601;</i></button></div>')
             $(this).removeClass("undo");
             $(this).addClass("done");
         }else {
             saveList("","undo",$(this).attr("index").substring(2,3));
+            $(this).find(".del").remove();
             $(this).removeClass("done");
             $(this).addClass("undo");
         }
     });
-    $("li").dblclick(function () {
-        if($(this).attr("class")=="done"){
-            saveList("","",$(this).attr("index").substring(2,3));
-            $(this).remove();
-        }else {
-        }
-    });
 });
-
+function del(i) {
+    // alert($(this)+"");
+    var temp=$("ul").find("li[index=li"+i+"]");
+    if(temp.attr("class")=="done"){
+        saveList("","",temp.attr("index").substring(2,3));
+        temp.remove();
+    }else {
+    }
+}
 function LocalStorage(con) {
     if(con!=""){
         localStorage.todolist=con;
@@ -43,21 +47,21 @@ function LocalStorage(con) {
         }
     }
 }
-
 function setList(content,type){
     for(var i=0;i<content.length;i++){
         var temp=$(".con-list");
         temp.append('<li index="li'+i+'" class="'+type[i]+'"><a>'+content[i]+'</a></li>');
+        if(type[i]=="done"){
+            $("li[index=li"+i+"]").append('<div class="del"><button onclick="del()"><i class="iconfont">&#xe601;</i></button></div>');
+        }
     }
 }
-
 function removeList() {
     var count=$(".con-list").children(".done");
     for(var i;i<count.length;i++){
         count[i].remove();
     }
 }
-
 function readList(jsonObj){
     var con=new Array();
     con[0]=new Array();
@@ -75,7 +79,6 @@ function readList(jsonObj){
     }
     return con;
 }
-
 function saveList(content,type,int) {
     var con=new Array();
     con[0]=new Array();
