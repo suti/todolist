@@ -1,4 +1,53 @@
 .head,.content{
     margin: 0 auto;
-    width:580px;
+    width:360px;
+}
+.head{
+    height:40px;
+}
+.title{
+    text-align: center;
+}
+.title a{
+    font-size: 20px;
+    line-height: 40px;
+    font-weight: bold;
+    color: orange;
+}
+.content{
+    text-align: center;
+}
+.input{
+display: inline-block;
+}
+form{
+    position: relative;
+}
+input{
+    text-align: center;
+    height:24px;
+    width:300px;
+}
+button{
+    position: absolute;
+
+    height: 24px;
+    width: 24px;
+    margin: 4px;
+    top:-1px;
+    left:308px;
+    /*padding: 4px;*/
+}
+ul{
+    list-style:none;
+    padding: 0;
+}
+li{
+    height:40px;
+    background: orange;
+    border-radius: 10px;
+    padding:0;
+    margin:10px 0;
+    font-size: 22px;
+    line-height:40px;
 }
