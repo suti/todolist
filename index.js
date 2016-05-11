@@ -11,11 +11,24 @@ $(document).ready(function () {
     $("button").click(function () {
         var con=$("input").val();
         saveList(con,"undo",-1);
-        // alert(con);
     });
+    $("li").click(function () {
+        if($(this).attr("class")=="undo"){
+            saveList("","done",$(this).attr("index").substring(2,3));
+            $(this).removeClass("undo");
+            $(this).addClass("done");
+        }else {
+            saveList("","undo",$(this).attr("index").substring(2,3));
+            $(this).removeClass("done");
+            $(this).addClass("undo");
+        }
+    })
     $("li").dblclick(function () {
-        saveList("","",$(this).attr("index").substring(2,3));
-        $(this).remove();
+        if($(this).attr("class")=="done"){
+            saveList("","",$(this).attr("index").substring(2,3));
+            $(this).remove();
+        }else {
+        }
     })
 });
 
@@ -63,22 +76,31 @@ function readList(jsonObj){
     return con;
 }
 
-function saveList(content,type,remove) {
+function saveList(content,type,int) {
     var con=new Array();
     con[0]=new Array();
     con[1]=new Array();
     var txt="";
     con=readList(LocalStorage(""));
-    if(remove<0){
+
+    if(content!=""){
         con[0].push(content);
         con[1].push(type);
         for(var i=0;i<con[0].length;i++){
             txt+='{"content":"'+con[0][i]+'","type":"'+con[1][i]+'"},';
         }
     }else {
-        for(var i=0;i<con[0].length;i++){
-            if(i!=remove){
-                txt+='{"content":"'+con[0][i]+'","type":"'+con[1][i]+'"},';
+        if(type!=""){
+            for(var i=0;i<con[0].length;i++){
+                if(i==int){
+                    txt+='{"content":"'+con[0][i]+'","type":"'+type+'"},';
+                }
+            }
+        }else {
+            for(var i=0;i<con[0].length;i++){
+                if(i!=int){
+                    txt+='{"content":"'+con[0][i]+'","type":"'+con[1][i]+'"},';
+                }
             }
         }
     }
